@@ -1,0 +1,22 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+pytest = "*"
+twine = "*"
+python-dotenv = "*"
+isort = "*"
+toml = "*"
+
+[packages]
+pydantic = "*"
+boto3 = "*"
+boto3-stubs = { extras = ["ec2", "vpc", "servicediscovery", "ssm", "kms", "sqs", "sns", "sts", "ecs", "s3", "elbv2"], version = "*" }
+mypy = "*"
+mypy_boto3 = "*"
+pycryptodome = "*"
+
+[requires]
+python_version = "3.8"
