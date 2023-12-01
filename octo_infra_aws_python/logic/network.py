@@ -482,7 +482,13 @@ class Network:
         try:
             logger.info(f"Starting to create subnet [{create_subnet.subnet_name}]")
             ec2_resource: EC2ServiceResource = boto3.resource("ec2")
-            subnet: Subnet = ec2_resource.create_subnet(CidrBlock=create_subnet.cidr_block, VpcId=create_subnet.vpc_id)
+            params = {
+                "CidrBlock": create_subnet.cidr_block,
+                "VpcId": create_subnet.vpc_id,
+            }
+            if create_subnet.availability_zone:
+                params['AvailabilityZone'] = create_subnet.availability_zone
+            subnet: Subnet = ec2_resource.create_subnet(**params)
             time.sleep(EXTRA_CREATION_SLEEP_TIME_SECONDS)
             create_subnet.tags["Name"] = create_subnet.subnet_name
             subnet.create_tags(Tags=[{"Key": k, "Value": v} for k, v in create_subnet.tags.items()])
