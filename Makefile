@@ -73,7 +73,4 @@ build: test isort
 
 publish:
 	@echo Release to pypi.org and create git tag
-	pipenv run twine upload dist/*
-	git tag -a $(VERSION) -m "Version $(VERSION)"
-	git push --tags
-
+	pipenv run twine upload --repository-url https://upload.pypi.org/legacy/ --skip-existing dist/*

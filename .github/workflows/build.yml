@@ -11,7 +11,7 @@ jobs:
         python-version: ["3.8", "3.9", "3.10"]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -28,3 +28,21 @@ jobs:
       - name: Build and Test
         run: |
           make build
+      - name: Publish
+        run: |
+          make publish
+        if: ${{ github.ref == 'refs/heads/main' && matrix.python-version == '3.8' }}
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+      - name: Version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        if: ${{ github.ref == 'refs/heads/main' && matrix.python-version == '3.8' }}
+        with:
+          path: ./VERSION
+      - name: Tag
+        uses: rickstaa/action-create-tag@v1
+        if: ${{ github.ref == 'refs/heads/main' && matrix.python-version == '3.8' }}
+        with:
+          tag: "${{ steps.version.outputs.content }}"
