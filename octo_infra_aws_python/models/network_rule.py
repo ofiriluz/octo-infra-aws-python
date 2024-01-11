@@ -8,3 +8,4 @@ class NetworkRule(BaseModel):
     to_port: conint(ge=-1, le=65535) = Field()  # AWS indicates -1 to be all ports
     allowed_cidr: List[str] = Field(default=[])
     allowed_groups: List[str] = Field(default=[])
+    description: str = Field(default='Automated Rule')
