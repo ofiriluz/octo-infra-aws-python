@@ -45,10 +45,10 @@ class Network:
                                                                      'FromPort': rule.from_port,
                                                                      'ToPort': rule.to_port,
                                                                      'IpRanges':
-                                                                         [{"CidrIp": v, "Description": "Automated Rule"}
+                                                                         [{"CidrIp": v, "Description": rule.description}
                                                                           for v in rule.allowed_cidr],
                                                                      'UserIdGroupPairs':
-                                                                         [{'UserIdGroupPairs': v, "Description": "Automated Rule"}
+                                                                         [{'UserIdGroupPairs': v, "Description": rule.description}
                                                                           for v in rule.allowed_groups]}])
             if create_security_group.egress:
                 for rule in create_security_group.egress:
@@ -56,11 +56,11 @@ class Network:
                                                                     'FromPort': rule.from_port,
                                                                     'ToPort': rule.to_port,
                                                                     'IpRanges':
-                                                                        [{"CidrIp": v, "Description": "Automated Rule"}
+                                                                        [{"CidrIp": v, "Description": rule.description}
                                                                          for v in rule.allowed_cidr],
                                                                     'UserIdGroupPairs':
                                                                         [{'UserIdGroupPairs': v,
-                                                                          "Description": "Automated Rule"}
+                                                                          "Description": rule.description}
                                                                          for v in rule.allowed_groups]}])
             logger.info(f"Security group created with ID [{security_group.id}]")
             return security_group.id
