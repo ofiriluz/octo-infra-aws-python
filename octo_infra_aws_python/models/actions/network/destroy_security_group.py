@@ -1,6 +1,4 @@
-from octo_infra_aws_python.models.network_rule import NetworkRule
 from pydantic import BaseModel, Field
-from typing import Optional, List
 
 
 class DestroySecurityGroup(BaseModel):

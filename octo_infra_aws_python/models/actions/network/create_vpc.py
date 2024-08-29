@@ -11,4 +11,4 @@ class CreateVPC(BaseModel):
     is_public: bool = Field(description="Whether the VPC should be public gateway wise",
                             default=True)
     tags: Dict[str, str] = Field(description="Tags to be used for the VPC",
-                                 default={})
+                                 default_factory=dict)
