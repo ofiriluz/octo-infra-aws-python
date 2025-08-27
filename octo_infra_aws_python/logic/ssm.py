@@ -89,7 +89,7 @@ class SSM:
         try:
             logger.info(f"Starting to search for SSM parameter [{find_ssm_parameter.name}]")
             ssm_client: SSMClient = boto3.client("ssm")
-            response: DescribeParametersResultTypeDef = ssm_client.describe_parameters(Filters=[
+            response: DescribeParametersResultTypeDef = ssm_client.describe_parameters(ParameterFilters=[
                 {
                     "Key": "Name",
                     "Values": [find_ssm_parameter.name]
