@@ -6,3 +6,5 @@ class CreateSSMParameter(BaseModel):
     value: str = Field()
     description: str = Field(default="")
     encrypt: bool = Field(default=True)
+    overwrite: bool = Field(default=False)
+

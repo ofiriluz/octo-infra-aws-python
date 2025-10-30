@@ -28,7 +28,8 @@ class SSM:
             response: PutParameterResultTypeDef = ssm_client.put_parameter(Name=create_ssm_parameter.name,
                                                                            Value=create_ssm_parameter.value,
                                                                            Description=create_ssm_parameter.description,
-                                                                           Type=key_type)
+                                                                           Type=key_type,
+                                                                           Overwrite=create_ssm_parameter.overwrite)
             if response["ResponseMetadata"]["HTTPStatusCode"] == HTTPStatus.OK:
                 logger.info(f"SSM Parameter created [{create_ssm_parameter.name}]")
                 return True
